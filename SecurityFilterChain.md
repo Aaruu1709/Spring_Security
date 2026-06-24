@@ -297,3 +297,191 @@ Controller
 Response
 ```
 
+# 1. What is HttpSecurity?
+
+### Answer
+
+> HttpSecurity is used to configure security rules in Spring Security. We use it to define which APIs are public, which require authentication, login configuration, CSRF settings, session management, and authorization rules.
+
+### Project Example
+
+> In my project, I use HttpSecurity to allow public access to login APIs and restrict employee management APIs to authenticated users.
+
+---
+
+# 2. What is AuthenticationManager?
+
+### Answer
+
+> AuthenticationManager is responsible for authenticating users. When a user submits username and password, Spring Security passes those credentials to AuthenticationManager, which validates them and returns an authenticated user if the credentials are correct.
+
+### Easy Memory
+
+```text
+Username + Password
+         ↓
+AuthenticationManager
+         ↓
+Valid or Invalid
+```
+
+---
+
+# 3. What is UserDetailsService?
+
+### Answer
+
+> UserDetailsService is an interface used to load user information during authentication. It contains the loadUserByUsername() method, which fetches user details from the database.
+
+### Project Example
+
+> In my project, I implemented UserDetailsService to load user data from the users table.
+
+---
+
+# 4. What is UsernamePasswordAuthenticationFilter?
+
+### Answer
+
+> UsernamePasswordAuthenticationFilter handles login requests containing username and password. It extracts the credentials from the request and starts the authentication process.
+
+### Internally
+
+```text
+Login Request
+      ↓
+UsernamePasswordAuthenticationFilter
+      ↓
+AuthenticationManager
+```
+
+---
+
+# 5. What is BasicAuthenticationFilter?
+
+### Answer
+
+> BasicAuthenticationFilter processes HTTP Basic Authentication requests. It reads the Authorization header, extracts username and password, and authenticates the user.
+
+Example:
+
+```http
+Authorization: Basic YWFydXU6MTEx
+```
+
+---
+
+# 6. What is CsrfFilter?
+
+### Answer
+
+> CsrfFilter protects the application from CSRF attacks. It validates the CSRF token for requests that modify data, such as POST, PUT, PATCH, and DELETE requests.
+
+### Example
+
+> When a user submits a form, Spring verifies the CSRF token before allowing the request.
+
+---
+
+# 7. What is SecurityContextHolder?
+
+### Answer
+
+> SecurityContextHolder stores the authentication information of the currently logged-in user. After successful login, Spring Security stores the Authentication object here so it can be accessed anywhere in the application.
+
+### Example
+
+```java
+Authentication auth =
+SecurityContextHolder.getContext().getAuthentication();
+```
+
+---
+
+# 8. What is JWT Authentication?
+
+### Answer
+
+> JWT Authentication is a stateless authentication mechanism where, after successful login, the server generates a JWT token and sends it to the client. The client includes the token in every request, and the server validates it before granting access.
+
+### Flow
+
+```text
+Login
+  ↓
+JWT Generated
+  ↓
+Client Stores Token
+  ↓
+Send Token In Every Request
+  ↓
+Server Validates
+```
+
+### Interview Point
+
+> JWT is commonly used in microservices and REST APIs because it is stateless.
+
+---
+
+# 9. What is Session Authentication?
+
+### Answer
+
+> Session Authentication is a stateful authentication mechanism. After successful login, the server creates a session and stores user information. The browser sends the session ID with every request, and the server uses it to identify the user.
+
+### Flow
+
+```text
+Login
+  ↓
+Session Created
+  ↓
+JSESSIONID Generated
+  ↓
+Browser Sends Session ID
+```
+
+---
+
+# 10. How Does Request Flow Through Spring Security?
+
+### Answer
+
+> Every request first passes through Spring Security's filter chain. Authentication filters verify the user's identity, authorization filters check permissions, and if all validations succeed, the request reaches the controller.
+
+### Flow
+
+```text
+Client Request
+      ↓
+SecurityFilterChain
+      ↓
+Authentication
+      ↓
+Authorization
+      ↓
+Controller
+      ↓
+Response
+```
+
+---
+
+# Most Important Interview Question
+
+### Session Authentication vs JWT Authentication
+
+### Answer
+
+> Session Authentication is stateful because user information is stored on the server side in a session. JWT Authentication is stateless because the server does not store session data; instead, the client sends the JWT token with each request.
+
+---
+
+# 1-Minute Spring Security Summary (Practice Daily)
+
+> Spring Security secures applications using authentication and authorization. Authentication verifies the user's identity, while authorization determines access permissions. HttpSecurity is used to configure security rules. UserDetailsService loads user data, AuthenticationManager validates credentials, and SecurityContextHolder stores authenticated user information. Requests pass through SecurityFilterChain, where filters such as UsernamePasswordAuthenticationFilter, BasicAuthenticationFilter, and CsrfFilter perform security checks. In modern applications, authentication can be implemented using either Session-based Authentication or JWT Authentication depending on the project requirements.
+
+---
+
+
