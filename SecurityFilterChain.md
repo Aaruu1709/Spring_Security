@@ -1,10 +1,35 @@
-
+```
+HttpSecurity (Builder Class)
+        ↓
+-----------------------------------
+| CSRF Configuration             |
+| Authorization Rules            |
+| Authentication Mechanism       |
+| Session Management             |
+| JWT Filters                    |
+| Exception Handling             |
+| Logout Configuration           |
+| CORS Configuration             |
+-----------------------------------
+        ↓
+http.build()
+        ↓
+SecurityFilterChain(interface)
+```
 
 # Q1. What is SecurityFilterChain?
 
 ### Interview Ready Answer
 
 > SecurityFilterChain is the central configuration component in Spring Security that defines how incoming HTTP requests should be secured. It contains a chain of security filters responsible for authentication, authorization, CSRF protection, session management, and other security-related operations before the request reaches the controller.
+
+What is SecurityFilterChain?
+
+SecurityFilterChain is an interface in Spring Security that represents a chain (list) of security filters through which every HTTP request passes before reaching the controller.
+
+Simple words:
+
+It is responsible for applying security checks like authentication, authorization, CSRF, JWT validation, session management, etc., on every request.
 
 ---
 
