@@ -10,7 +10,7 @@
 | `anonymous()`                              | Only users who are NOT logged in can access    | Registration or login page  |
 | `access()`                                 | Custom access rules using expressions          | Complex business conditions |
 
-
+```
 
 PasswordEncoder (Interface)
         ↑
@@ -25,7 +25,8 @@ Store Password    Verify Password
 
 boolean result =
     BCrypt.checkpw(rawPassword, encodedPassword);
-    -----------------------------------------------------------
+```
+```
 
 PasswordEncoder (Interface)
         ↑
@@ -43,7 +44,9 @@ UserDetailsService (Interface)
 UserDetails (Interface)
             ↑ implemented by
       User (Class)
+```
       ------------------------------------------------------------------------------------
+```
 
                 USER LOGIN
                      ↓
@@ -67,3 +70,4 @@ Manager        Manager           Service
           ↓                  ↓
        User            CustomUserDetails
       (Class)              (Class)
+```
